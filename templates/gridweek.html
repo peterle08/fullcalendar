@@ -1,0 +1,40 @@
+<!-- base html for extension -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- bootstrap 4 & jquery-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <!-- fullcalenar api -->
+    <link href='/static/node_modules/fullcalendar/main.css' rel='stylesheet' />
+    <script src='/static/node_modules/fullcalendar/main.js'></script>
+
+    <title>Calendar</title>
+</head>
+
+<body>
+    <div class="container">
+        <div id="calendar"></div>
+    </div>
+</body>
+<!-- Script Extension part-->
+<script>
+    let eventList = {{ events | safe }}; //get events from jinja
+    document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'timeGridWeek',
+        selectable: true, // enable selectable
+        events : eventList,
+    });
+    calendar.render();
+    });
+</script>
+
+</html>
